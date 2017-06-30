@@ -1,0 +1,85 @@
+html{
+	background: #fff;
+}
+body{
+	/* kolor tła elementu */
+	background: #009933;
+	/* padding reset body rozciaga się na 100% długości*/
+	padding: 0px;
+	margin: 0px;
+	font-size: 14px;
+	color: #000;	
+}
+a{
+
+}
+.top{
+	float: left; width: 100%; 
+	padding: 5px; margin: 0px;
+	overflow: hidden; 
+	box-sizing: border-box;
+	border: 1px solid #000;
+}
+.top img{
+	float: left; height: 50px;
+}
+.top .menu{
+	float: right;
+	display: inherit;
+}
+.top .menu .m{
+	float: right;
+	padding: 15px;
+	text-decoration: none; 
+	color: #000;
+	font-size: 20px; 
+	font-weight: 300;
+	text-transform: uppercase;
+	font-family: Arial;
+	display: inherit;
+}
+.top .menu .m:hover{
+	background: #093;
+}
+
+.top .menubtn{
+	float: right;	
+	display: none;
+}
+
+.show{display: inherit;}
+
+
+/* RWD STYLE MENU dla różnych szerokości ekranu zmienia się wartość koloru tła */
+/* do 1024px */
+@media all and (max-width: 1024px){
+	.top{background: #0f0}
+	.top .menu{
+		float: left;
+		width: 100%;
+		overflow: hidden;
+		box-sizing: border-box;
+		/* ukryj menu */
+		display: none;
+	}
+	.top .menu .m{
+		float: left;
+		width: 100%;
+	}	
+	/* pokaż button jeżeli rozdzielczosć < 1024 */
+	.top .menubtn{		
+		display: inherit;
+		width: 30px;
+		padding: 10px;
+		height: auto;
+	}	
+}
+/* do 768px */
+@media all and (max-width: 768px){
+	.top{background: #00f}
+}
+/* do 480 px */
+@media all and (max-width: 480px){
+	.top{background: #f00}
+}
+
