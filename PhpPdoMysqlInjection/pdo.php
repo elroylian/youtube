@@ -1,40 +1,33 @@
 <?php
+// PHP PDO prevent sql injection
+// Example:
+// https://github.com/fxstar/youtube
+?>
+<?php
 session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-
 ini_set('display_errors', 1);
 ini_set("default_charset", "UTF-8");
-
 date_default_timezone_set('Europe/Warsaw');
 header('Content-Type: text/html; charset=utf-8');
 
-// Mysql database
+// Mysql database name: pdo
 $mdatabase = 'pdo';
 $muser = 'root';
 $mpass = 'toor';
 $mhost = 'localhost';
 $mport = 3306;
 
-$pdo = new PdoDb();
-echo $pdo->addProdukt('Arbuz',25.55,"Niesamowity produkt");
-
-// show products
-$rows = $pdo->getProdukt();
-echo "<pre>";
-print_r($rows);
-
-// del produkt
-echo $pdo->delProdukt(1);
-
 class PdoDb
 {
 	public $db;
 	function __construct()
 	{
-		// db connection
+		// PDO db connection
 		$this->db = $this->Conn();
-		// clear POST and GET
+		// clear POST and GET from sql injection
 		$this->Clear();
+		// Create table if not exists
 		$this->CreateTable();
 	}
 
@@ -59,7 +52,7 @@ class PdoDb
 		}
 	}
 
-	// PDO
+	// PDO php  mysql connection 
 	function Conn(){
 		// load from global variables
 		global $mhost,$mport,$muser,$mpass,$mdatabase;
@@ -72,7 +65,7 @@ class PdoDb
 		return $con;
 	}
 
-	// Sql injection prevent
+	// Sql injection prevent !!! 
 	function Clear(){
 		foreach ($_GET as $key => $val) { 
 	  		$val = $this->clearPHP($val);
@@ -101,17 +94,21 @@ class PdoDb
 		return $s = str_replace('<script', '', $s);		
 	}
 
+	// Insert to database
 	function addProdukt($nazwa,$cena,$opis){		
 		try{
-			$id = 0;				
-			$r = $this->db->query("INSERT INTO prod(nazwa,cena,opis) VALUES('$nazwa',$cena,'$opis')");
+			$id = 0;		
+			$time = time();		
+			$r = $this->db->query("INSERT INTO prod(nazwa,cena,opis,time) VALUES('$nazwa',$cena,'$opis',$time)");
 			$id = $this->db->lastInsertId();						
 			return $id;
 		}catch(Exception $e){
+			print_r($e->errorInfo);
 			return 0;
 		}		
 	}
 
+	// Get from database
 	function getProdukt($ile = 3){		
 		try{
 			$ile = (int)$ile;
@@ -123,6 +120,7 @@ class PdoDb
 		return $rows;
 	}
 
+	// get product with id
 	function getProduktID($id){		
 		try{
 			$id = (int)$id;			
@@ -134,6 +132,7 @@ class PdoDb
 		return $rows;
 	}
 
+	// Update table, hide product
 	function delProdukt($id){		
 		try{
 			$id = (int)$id;
@@ -181,4 +180,18 @@ class PdoDb
 	    return $ipa;
 	}
 } // end class
+
+// Create object
+$pdo = new PdoDb();
+// Add row to table
+echo $pdo->addProdukt('Arbuz '.rand(100,900),25.55,"Niesamowity produkt");
+
+// show products
+$rows = $pdo->getProdukt(5);
+echo "<pre>";
+print_r($rows);
+
+// del produkt
+echo $pdo->delProdukt(1);
 ?>
+
