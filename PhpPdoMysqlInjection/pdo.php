@@ -1,10 +1,30 @@
 <?php
+session_start();
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+
+ini_set('display_errors', 1);
+ini_set("default_charset", "UTF-8");
+
+date_default_timezone_set('Europe/Warsaw');
+header('Content-Type: text/html; charset=utf-8');
+
 // Mysql database
-$mdatabase = 'sun';
+$mdatabase = 'pdo';
 $muser = 'root';
 $mpass = 'toor';
 $mhost = 'localhost';
 $mport = 3306;
+
+$pdo = new PdoDb();
+echo $pdo->addProdukt('Arbuz',25.55,"Niesamowity produkt");
+
+// show products
+$rows = $pdo->getProdukt();
+echo "<pre>";
+print_r($rows);
+
+// del produkt
+echo $pdo->delProdukt(1);
 
 class PdoDb
 {
@@ -31,7 +51,12 @@ class PdoDb
 		  PRIMARY KEY (`id`)
 		) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 		";
-		$this->db->query($sql);
+		try{
+			$this->db->query($sql);
+			return 1;
+		}catch(Exception $e){
+			return 0;
+		}
 	}
 
 	// PDO
@@ -87,9 +112,10 @@ class PdoDb
 		}		
 	}
 
-	function getProdukt(){		
+	function getProdukt($ile = 3){		
 		try{
-			$r = $this->db->query("SELECT * FROM prod ORDER BY id DESC LIMIT 10");
+			$ile = (int)$ile;
+			$r = $this->db->query("SELECT * FROM prod ORDER BY id DESC LIMIT $ile");
 			$rows = $r->fetchAll(PDO::FETCH_ASSOC);			
 		}catch(Exception $e){
 			return $rows;
@@ -108,7 +134,7 @@ class PdoDb
 		return $rows;
 	}
 
-	function delProduct($id){		
+	function delProdukt($id){		
 		try{
 			$id = (int)$id;
 			$r = $this->db->query("UPDATE prod SET active = 0 WHERE id = $id");
