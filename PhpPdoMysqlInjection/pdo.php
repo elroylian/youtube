@@ -6,7 +6,7 @@ $mpass = 'toor';
 $mhost = 'localhost';
 $mport = 3306;
 
-class PDO
+class PdoDb
 {
 	public $db;
 	function __construct()
