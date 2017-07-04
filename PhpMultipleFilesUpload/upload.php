@@ -27,6 +27,6 @@ foreach ($_FILES['files']['type'] as $key => $value) {
 }
 ?>
 <form method="post" action="" enctype="multipart/form-data">
-	<input type="file" name="files[]" multiple="true" type="*/image">
+	<input type="file" name="files[]" multiple="true" accept="image/*">
 	<input type="submit" name="upload" value="UPLOAD">
 </form>
