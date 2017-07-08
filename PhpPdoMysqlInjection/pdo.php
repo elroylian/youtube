@@ -5,11 +5,14 @@
 ?>
 <?php
 session_start();
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+// error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 ini_set('display_errors', 1);
 ini_set("default_charset", "UTF-8");
 date_default_timezone_set('Europe/Warsaw');
+// add header
 header('Content-Type: text/html; charset=utf-8');
+// allow use from js from another host
+header('Access-Control-Allow-Origin: *');
 
 // Mysql database name: pdo
 $mdatabase = 'pdo';
@@ -42,14 +45,16 @@ class PdoDb
 	function Conn(){
 		// load from global variables
 		global $mhost,$mport,$muser,$mpass,$mdatabase;
-		$con = new PDO('mysql:host='.$mhost.';port='.$mport.';dbname='.$mdatabase.';charset=utf8', $muser, $mpass);
-		$con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		// enable errors
+		$con = new PDO('mysql:host='.$mhost.';port='.$mport.';dbname='.$mdatabase.';charset=utf8', $muser, $mpass);		
+		// enable errors, warnings
 		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$con->setAttribute(PDO::ATTR_PERSISTENT, false);
 		// Set init command to set charset
 		$con->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES 'utf8' COLLATE 'utf8_general_ci'");
+		// don't cache query
+		$con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		// don't colose connecion on script end		
+		$con->setAttribute(PDO::ATTR_PERSISTENT, false);
 		return $con;
 	}
 
