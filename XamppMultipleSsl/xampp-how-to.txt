@@ -1,0 +1,29 @@
+# install
+https://www.apachefriends.org/xampp-files/5.6.31/xampp-win32-5.6.31-0-VC11-installer.exe
+
+# add users to htdocs folder (right click on folder> security tab > Edit ... and allow write and read permission)
+IIS_IUSERS i/lub IUSER
+
+# add enviroment variables (if you need)
+C:\xampp\php\php.exe
+C:\xampp\mysql\bin\mysql.exe
+
+# if use cron remember add path to php and run from cron.bat file:
+@ECHO OFF
+C:\xampp\php\php.exe -f "C:\xampp\htdocs\domena.xx\cron-email.php"
+
+# backup folders:
+c:\ssl
+c:\xampp\htdocs
+c:\xampp\apache\conf
+C:\xampp\apache\logs
+
+# mysql set password for root user
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('toor');
+
+# kill process
+netstat -o -n -a | findstr 0.0:3306
+taskkill /F /PID 1234
+
+Jeżeli xampp nie działa z zewnątrz dodajemy reguły otwierające porty:
+80 i 443 na firewallu !!!
