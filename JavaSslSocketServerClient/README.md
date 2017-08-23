@@ -1,0 +1,3 @@
+### Java ssl socket server with multiple connections in separate thread with thread pool
+### java ssl socket client
+#### close connection enter ...
