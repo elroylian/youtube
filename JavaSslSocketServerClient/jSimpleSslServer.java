@@ -41,7 +41,12 @@ public class JSimpleSslServer {
             sslContext.init(kms, null, new SecureRandom());
             
             SSLServerSocketFactory ssf = (SSLServerSocketFactory) sslContext.getServerSocketFactory();
+            
+            // All ip addresses
             SSLServerSocket sslServerSocket = (SSLServerSocket) ssf.createServerSocket(8888);
+            // Single ip address
+            // InetAddress addrIP = InetAddress.getByName("127.0.0.1");
+            // SSLServerSocket sslServerSocket = (SSLServerSocket) ssf.createServerSocket(8888,0,addrIP);
             
             sslServerSocket.setEnabledCipherSuites(new String[]{
                     "SSL_DH_anon_EXPORT_WITH_RC4_40_MD5",
