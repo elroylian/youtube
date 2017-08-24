@@ -20,8 +20,8 @@ public class JSimpleSslClient {
         System.out.println(trustStoreFilename);
         
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-        System.setProperty("javax.net.ssl.trustStore", "marcys");
-        System.setProperty("javax.net.ssl.trustStorePassword", "123456");      
+        System.setProperty("javax.net.ssl.trustStore", "YOUTUBE");
+        // System.setProperty("javax.net.ssl.trustStorePassword", "123456");      
      
         // System.setProperty("javax.net.ssl.trustStore","/home/user/jdk1.8.0_141/jre/lib/security/cacerts");
         // System.setProperty("javax.nt.ssl.trustStorePassword","changeit");
