@@ -22,8 +22,8 @@ COMMIT
 # Allow ping
 -A INPUT -p icmp -j ACCEPT
 # Allow SSH, RDP from ip/mask
--A INPUT -s 89.230.0.0/16 -p tcp -m tcp --dport 22 -j ACCEPT
--A INPUT -s 89.230.0.0/16 -p tcp -m tcp --dport 3389 -j ACCEPT
+-A INPUT -s 1.230.0.0/16 -p tcp -m tcp --dport 22 -j ACCEPT
+-A INPUT -s 1.230.0.0/16 -p tcp -m tcp --dport 3389 -j ACCEPT
 # Allow HTTP,HTTPS
 -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
