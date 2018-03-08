@@ -7,11 +7,11 @@
 /var/www/ssl/breakermind.com/ca_bundle.crt
 
 # Chmods for all folder
-chown www-data:www-data /var/www/html
+chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
 # Or only for uplaods folders in domain
-chown www-data:www-data /var/www/html/breakermind.com/media
+chown -R www-data:www-data /var/www/html/breakermind.com/media
 chmod -R 755 /var/www/html/breakermind.com/media
 
 # Disable sites
