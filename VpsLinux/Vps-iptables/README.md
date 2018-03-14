@@ -1,10 +1,14 @@
 # Linux iptables firewall
 
 ### Aktywne reguły firewalla ipv4 lub ipv6 (iptables lub ip6tables)
-iptables -L -v -n , ip6tables -L -v -n
-# lub dla konkretnej tablicy (raw)
-iptables -t nat -L -n -v
+```
+iptables -L -v -n  lub ip6tables -L -v -n
+```
 
+# Dla konkretnej tablicy (raw)
+```
+iptables -t nat -L -n -v
+```
 
 ### Polityka na przyjmuj wszystkie połączenia ACCEPT lub blokuj DROP
 ```
@@ -97,7 +101,7 @@ iptables-save > ip4
 ip6tables-save > ip6
 ```
 
-### Wszytaj reguły
+### Wczytaj reguły
 ```
 iptables-restore < ip4
 ip6tables-restore < ip6
