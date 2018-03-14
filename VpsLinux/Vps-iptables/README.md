@@ -38,7 +38,7 @@ iptables -A INPUT -i lo -j ACCEPT
 # iptables -t nat -A INPUT -i lo -j ACCEPT
 ```
 
-### Przepuszczaj połączenia zainicjowane przez nasz server (wychodzące)
+### Przepuszczaj połączenia zainicjowane przez nasz server (wychodzące,powracające)
 ```
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 ```
